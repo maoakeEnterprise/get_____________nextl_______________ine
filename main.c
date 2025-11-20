@@ -14,12 +14,7 @@ int	main(void)
 	if (!line)
 		return (0);
 	i = 0;
-	while (line)
-	{
-		printf("%s", line);
-		line = get_next_line(fd);
-		i++;
-	}
+	printf("%s", line);
 	close(fd);
 	free(line);
 	return (0);

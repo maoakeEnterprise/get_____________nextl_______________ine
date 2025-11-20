@@ -6,7 +6,7 @@
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:57:40 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/20 15:43:56 by mteriier         ###   ########lyon.fr   */
+/*   Updated: 2025/11/20 16:12:10 by mteriier         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ char	*ft_strdup(const char *s)
 	if (!tmp)
 		return (NULL);
 	while (s[i])
-		tmp[i] = s[i++];
+	{
+		tmp[i] = s[i];
+		i++;
+	}
 	tmp[i] = 0;
 	return (tmp);
 }
@@ -46,12 +49,15 @@ char	*f_realloc(char *str, char *buff)
 	dup = ft_strdup(str);
 	if (!dup)
 		return (NULL);
-	lendup = ft_strlen(dup)
+	lendup = ft_strlen(dup);
 	len = ft_strlen(buff);
 	free(str);
 	str = malloc((len + lendup + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
 	str = ft_strcpy(str, dup);
 	str = ft_strcat(str, buff);
+	return (str);
 }
 
 char	*ft_strcpy(char *dst, const char *src)

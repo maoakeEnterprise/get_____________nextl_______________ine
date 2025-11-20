@@ -6,18 +6,16 @@
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:56:16 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/20 15:44:10 by mteriier         ###   ########lyon.fr   */
+/*   Updated: 2025/11/20 16:12:13 by mteriier         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	
-
 char	*read_file(int fd, char *buffer)
 {
 	int	reader;
-	char	*line;
+	char	*big_buffer;
 	size_t	i;
 
 	reader = read(fd, buffer, BUFFER_SIZE);
@@ -25,11 +23,17 @@ char	*read_file(int fd, char *buffer)
 		return (NULL);
 	buffer[reader] = 0;
 	i = 0;
+	big_buffer = malloc(1 * sizeof(char));
+	if (!big_buffer)
+		return (NULL);
+	big_buffer[0] = 0;
 	while (reader > 0)
 	{
+		big_buffer = f_realloc(big_buffer, buffer);
 		reader = read(fd, buffer, BUFFER_SIZE);
+		buffer[reader] = 0;
 	}
-	return (buffer);
+	return (big_buffer);
 }
 
 char	*get_next_line(int fd)
