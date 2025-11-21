@@ -6,7 +6,7 @@
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:56:16 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/21 14:54:03 by mteriier         ###   ########lyon.fr   */
+/*   Updated: 2025/11/21 22:37:04 by mteriier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,10 @@ int	read_file(int fd, char *buffer)
 	return (reader);
 }
 
-void	big_free(char *buffer)
+char	*fill_line(char *buffer, char *line, int fd)
 {
-	free(buffer);
-}
-
-char	*get_line(int fd, char *buffer)
-{
-	char	*line;
-	size_t	i;
 	int	reader;
 
-	i =0;
-	line = malloc (1 * sizeof(char));
-	if (!line)
-		return (NULL);
-	line[0] = 0;
 	reader = 1;
 	while (buffer[0] != '\n' && reader > 0)
 	{
@@ -49,8 +37,25 @@ char	*get_line(int fd, char *buffer)
 			move_buffer(buffer);
 		}
 		else
-			reader = read_file(fd, buffer);	
+			reader = read_file(fd, buffer);
 	}
+	if (reader == 0)
+	{
+		free(line);
+		return (NULL);
+	}
+	return (line);
+}
+
+char	*get_line(int fd, char *buffer)
+{
+	char	*line;
+
+	line = malloc (1 * sizeof(char));
+	if (!line)
+		return (NULL);
+	line[0] = 0;
+	line = fill_line(buffer, line, fd);
 	if (buffer[0] == '\n')
 	{
 		line = f_realloc(line, '\n');
@@ -64,10 +69,9 @@ char	*get_line(int fd, char *buffer)
 char	*get_next_line(int fd)
 {
 	static char	*buffer;
-	char	*line;
+	char		*line;
 
-
-	if (fd < 0)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	if (!buffer)
 	{
@@ -80,6 +84,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = get_line(fd, buffer);
 	if (!line)
-		return (NULL);
+		return (free(buffer),NULL);
 	return (line);
 }
