@@ -6,7 +6,7 @@
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:57:24 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/20 16:12:06 by mteriier         ###   ########lyon.fr   */
+/*   Updated: 2025/11/21 14:12:59 by mteriier         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # endif
 
 char	*get_next_line(int fd);
-char	*f_realloc(char *str, char *buff);
+char	*f_realloc(char *str, char c);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_strcpy(char *dst, const char *src);
-char	*ft_strcat(char *dst, const char *src);
+void	move_buffer(char *buffer);
 
 #endif

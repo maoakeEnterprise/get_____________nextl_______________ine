@@ -6,7 +6,7 @@
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:57:40 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/20 16:12:10 by mteriier         ###   ########lyon.fr   */
+/*   Updated: 2025/11/21 14:13:07 by mteriier         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,22 @@ char	*ft_strdup(const char *s)
 	return (tmp);
 }
 
-char	*f_realloc(char *str, char *buff)
+char	*f_realloc(char *str, char c)
 {
 	char	*dup;
-	size_t	len;
 	size_t	lendup;
 
 	dup = ft_strdup(str);
 	if (!dup)
 		return (NULL);
 	lendup = ft_strlen(dup);
-	len = ft_strlen(buff);
 	free(str);
-	str = malloc((len + lendup + 1) * sizeof(char));
+	str = malloc((lendup + 2) * sizeof(char));
 	if (!str)
 		return (NULL);
 	str = ft_strcpy(str, dup);
-	str = ft_strcat(str, buff);
+	str[lendup] = c;
+	str[lendup + 1] = 0;
 	return (str);
 }
 
@@ -74,19 +73,15 @@ char	*ft_strcpy(char *dst, const char *src)
 	return (dst);
 }
 
-char	*ft_strcat(char *dst, const char *src)
+void	move_buffer(char *buffer)
 {
-	size_t	j;
 	size_t	i;
 
-	j = ft_strlen(dst);
 	i = 0;
-	while (src[i])
+	while (buffer[i + 1])
 	{
-		dst[j] = src[i];
-		j++;
+		buffer[i] = buffer[i + 1];
 		i++;
 	}
-	dst[j] = 0;
-	return (dst);
+	buffer[i] = 0;
 }

@@ -14,6 +14,8 @@ int	main(void)
 	if (!line)
 		return (0);
 	i = 0;
+	//printf("%s", line);
+	line = get_next_line(fd);
 	printf("%s", line);
 	close(fd);
 	free(line);

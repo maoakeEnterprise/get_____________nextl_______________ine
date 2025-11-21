@@ -6,46 +6,80 @@
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:56:16 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/20 16:12:13 by mteriier         ###   ########lyon.fr   */
+/*   Updated: 2025/11/21 14:43:10 by mteriier         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*read_file(int fd, char *buffer)
+int	read_file(int fd, char *buffer)
 {
 	int	reader;
-	char	*big_buffer;
-	size_t	i;
 
+	reader = 1;
 	reader = read(fd, buffer, BUFFER_SIZE);
-	if (reader < 0 || !buffer)
-		return (NULL);
 	buffer[reader] = 0;
-	i = 0;
-	big_buffer = malloc(1 * sizeof(char));
-	if (!big_buffer)
+	return (reader);
+}
+
+void	big_free(char *buffer)
+{
+	free(buffer);
+}
+
+char	*get_line(int fd, char *buffer)
+{
+	char	*line;
+	size_t	i;
+	int	reader;
+
+	i =0;
+	line = malloc (1 * sizeof(char));
+	if (!line)
 		return (NULL);
-	big_buffer[0] = 0;
-	while (reader > 0)
+	line[0] = 0;
+	reader = 1;
+	while (buffer[0] != '\n' && reader > 0)
 	{
-		big_buffer = f_realloc(big_buffer, buffer);
-		reader = read(fd, buffer, BUFFER_SIZE);
-		buffer[reader] = 0;
+		if (ft_strlen(buffer))
+		{
+			line = f_realloc(line, buffer[0]);
+			if (!line)
+				return (free(buffer), NULL);
+			move_buffer(buffer);
+		}
+		else
+			reader = read_file(fd, buffer);	
 	}
-	return (big_buffer);
+	if (buffer[0] == '\n')
+	{
+		line = f_realloc(line, '\n');
+		if (!line)
+			return (free(buffer), NULL);
+		move_buffer(buffer);
+	}
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*buffer;
+	char	*line;
 
+
+	if (fd < 0)
+		return (NULL);
 	if (!buffer)
-		buffer = malloc((BUFFER_SIZE + 1) * sizeof (char));
+	{
+		buffer = malloc ((BUFFER_SIZE + 1) * sizeof(char));
+		if (!buffer)
+			return (NULL);
+		buffer[0] = 0;
+	}
 	if (!buffer)
 		return (NULL);
-	if (fd == -1)
+	line = get_line(fd, buffer);
+	if (!line)
 		return (NULL);
-	buffer = read_file(fd, buffer);
-	return (buffer);
+	return (line);
 }
