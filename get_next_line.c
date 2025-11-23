@@ -6,7 +6,7 @@
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:56:16 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/21 22:37:04 by mteriier         ###   ########.fr       */
+/*   Updated: 2025/11/23 10:47:56 by mteriier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*fill_line(char *buffer, char *line, int fd)
 		{
 			line = f_realloc(line, buffer[0]);
 			if (!line)
-				return (free(buffer), NULL);
+				return (NULL);
 			move_buffer(buffer);
 		}
 		else
@@ -60,7 +60,7 @@ char	*get_line(int fd, char *buffer)
 	{
 		line = f_realloc(line, '\n');
 		if (!line)
-			return (free(buffer), NULL);
+			return (NULL);
 		move_buffer(buffer);
 	}
 	return (line);
