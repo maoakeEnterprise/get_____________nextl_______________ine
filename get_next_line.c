@@ -6,7 +6,7 @@
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:56:16 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/23 10:47:56 by mteriier         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:33:14 by mteriier         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	read_file(int fd, char *buffer)
 
 	reader = 1;
 	reader = read(fd, buffer, BUFFER_SIZE);
-	buffer[reader] = 0;
+	if (reader >= 0)
+		buffer[reader] = 0;
 	return (reader);
 }
 
@@ -47,7 +48,7 @@ char	*fill_line(char *buffer, char *line, int fd)
 	return (line);
 }
 
-char	*get_line(int fd, char *buffer)
+char	*get_the_line(int fd, char *buffer)
 {
 	char	*line;
 
@@ -56,6 +57,8 @@ char	*get_line(int fd, char *buffer)
 		return (NULL);
 	line[0] = 0;
 	line = fill_line(buffer, line, fd);
+	if (!line)
+		return (NULL);
 	if (buffer[0] == '\n')
 	{
 		line = f_realloc(line, '\n');
@@ -80,10 +83,8 @@ char	*get_next_line(int fd)
 			return (NULL);
 		buffer[0] = 0;
 	}
-	if (!buffer)
-		return (NULL);
-	line = get_line(fd, buffer);
+	line = get_the_line(fd, buffer);
 	if (!line)
-		return (free(buffer),NULL);
+		return (free(buffer), NULL);
 	return (line);
 }

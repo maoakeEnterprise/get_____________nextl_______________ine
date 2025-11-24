@@ -6,7 +6,7 @@
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:57:40 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/23 10:51:07 by mteriier         ###   ########.fr       */
+/*   Updated: 2025/11/24 14:21:51 by mteriier         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i])
 		i++;
 	return (i);
@@ -47,12 +49,12 @@ char	*f_realloc(char *str, char c)
 
 	dup = ft_strdup(str);
 	if (!dup)
-		return (free(str),NULL);
+		return (free(str), NULL);
 	lendup = ft_strlen(dup);
 	free(str);
 	str = malloc((lendup + 2) * sizeof(char));
 	if (!str)
-		return (free(dup),NULL);
+		return (free(dup), NULL);
 	str = ft_strcpy(str, dup);
 	free(dup);
 	str[lendup] = c;

@@ -1,18 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/24 12:54:58 by mteriier          #+#    #+#             */
+/*   Updated: 2025/11/24 14:48:17 by mteriier         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <stdio.h>
 #include <fcntl.h>
 #include "get_next_line.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	int	fd;
+	int		fd;
 	char	*line;
-	int	i;
+	int		i;
 
-	fd = open("filetest.txt", O_RDONLY);
+	(void)ac;
+	fd = open(av[1], O_RDONLY);
 	line = get_next_line(fd);
 	if (!line)
+	{
+		close(fd);
 		return (0);
+	}
 	i = 0;
 	while (line)
 	{

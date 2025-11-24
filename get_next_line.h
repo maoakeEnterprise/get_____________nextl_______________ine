@@ -6,7 +6,7 @@
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:57:24 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/21 22:30:55 by mteriier         ###   ########.fr       */
+/*   Updated: 2025/11/24 11:50:28 by mteriier         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 32
 # endif
 
 char	*get_next_line(int fd);
