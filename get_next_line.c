@@ -6,7 +6,7 @@
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:56:16 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/24 20:26:09 by mteriier         ###   ########.fr       */
+/*   Updated: 2025/11/26 15:27:11 by mteriier         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,13 @@ char	*get_the_line(int fd, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	buffer[BUFFER_SIZE + 1];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, 0, 0) < 0)
 		return (NULL);
-	if (!buffer)
-	{
-		buffer = malloc ((BUFFER_SIZE + 1) * sizeof(char));
-		if (!buffer)
-			return (NULL);
-		buffer[0] = 0;
-	}
 	line = get_the_line(fd, buffer);
 	if (!line)
-		return (free(buffer), NULL);
+		return (NULL);
 	return (line);
 }
