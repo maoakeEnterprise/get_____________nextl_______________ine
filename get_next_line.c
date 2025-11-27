@@ -77,7 +77,10 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, 0, 0) < 0)
+	{
+		buffer[0] = 0;
 		return (NULL);
+	}
 	line = get_the_line(fd, buffer);
 	if (!line)
 		return (NULL);
