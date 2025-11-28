@@ -6,11 +6,17 @@
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 11:56:16 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/26 15:27:11 by mteriier         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 08:14:21 by mteriier         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*the_big_free(char *s)
+{
+	free(s);
+	return (NULL);
+}
 
 int	read_file(int fd, char *buffer)
 {
@@ -43,10 +49,7 @@ char	*fill_line(char *buffer, char *line, int fd)
 			reader = read_file(fd, buffer);
 	}
 	if (reader == 0 && ft_strlen(line) == 0)
-	{
-		free(line);
-		return (NULL);
-	}
+		return (the_big_free(line));
 	return (line);
 }
 
