@@ -6,7 +6,7 @@
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 12:54:58 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/28 08:46:12 by mteriier         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 10:03:35 by mteriier         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int ac, char **av)
 	line = get_next_line(fd);
 	while (line)
 	{
-		printf("%s", line);
+		//printf("%s", line);
 		free(line);
 		line = get_next_line(fd);
 		i++;

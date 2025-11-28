@@ -6,7 +6,7 @@
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 08:22:33 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/28 08:35:53 by mteriier         ###   ########lyon.fr   */
+/*   Updated: 2025/11/28 12:46:54 by mteriier         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*f_realloc(char *str, char c)
 
 	dup = ft_strdup(str);
 	if (!dup)
-		return (free(str), NULL);
+		return (the_big_free(str));
 	lendup = ft_strlen(dup);
 	free(str);
 	str = malloc((lendup + 2) * sizeof(char));
