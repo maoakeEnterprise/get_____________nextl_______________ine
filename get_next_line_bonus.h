@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 12:54:58 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/28 08:46:12 by mteriier         ###   ########lyon.fr   */
+/*   Created: 2025/11/28 08:22:21 by mteriier          #+#    #+#             */
+/*   Updated: 2025/11/28 08:23:49 by mteriier         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <fcntl.h>
-#include "get_next_line.h"
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-int	main(int ac, char **av)
-{
-	int		fd;
-	char	*line;
-	int		i;
+# include <unistd.h>
+# include <stdlib.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
-	(void)ac;
-	fd = open(av[1], O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
-	{
-		printf("%s", line);
-		free(line);
-		line = get_next_line(fd);
-		i++;
-	}
-	close(fd);
-	return (0);
-}
+char	*get_next_line(int fd);
+char	*f_realloc(char *str, char c);
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *s);
+char	*ft_strcpy(char *dst, const char *src);
+void	move_buffer(char *buffer);
+char	*the_big_free(char *s);
+
+#endif
