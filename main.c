@@ -6,7 +6,7 @@
 /*   By: mteriier <mteriier@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 12:54:58 by mteriier          #+#    #+#             */
-/*   Updated: 2025/11/28 21:42:38 by mteriier         ###   ########.fr       */
+/*   Updated: 2025/11/29 19:52:41 by mteriier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ void	ERROR_TEST(char *filename)
 	printf("=======================================\n");
 	free(line_legit);
 	free(line_test);
-
 }
 
 int	main(int argc, char **argv)
